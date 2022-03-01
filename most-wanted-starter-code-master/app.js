@@ -86,29 +86,142 @@ function searchByName(people){
 }
 
 //unfinished function to search through an array of people to find matching eye colors. Use searchByName as reference.
+
 function searchByTraits(people){
-  //let searchEyeColor = searchByEyeColor(people);
-  // assign tempPeople to people
+  let searchType = promptFor("What trait would you like to search for?", people).toLowerCase();
+  let tempPeople = people 
+tempPeople = searchByEyeColor(tempPeople);
+tempPeople = searchByGender(tempPeople);
+tempPeople = searchByDob(tempPeople);
+tempPeople = searchById(tempPeople);
+tempPeople = searchByHeight(tempPeople);
+tempPeople = searchByWeight(tempPeople);
+tempPeople = searchByOccupation(tempPeople);
+tempPeople = searchByParents(tempPeople);
+tempPeople = searchByCurrentSpouse(tempPeople);
+  // while loop
 
- // while loop
-
-  // switch case
 
 // display people or person
 // tempPeople.length = 1
-  let searchType = promptFor("Do you know their eye color?", yesNo).toLowerCase();
+  
   let searchResults;
   switch(searchType){
-    case 'yes':
+    case 'eye color':
       searchResults = searchByEyeColor(people);
+    case 'id':
+      searchResults = searchById(people);
+    case 'gender':
+      searchResults = searchByGender(people);
+    case 'dob':
+      searchResults = searchByDob(people);
+    case 'height':
+      searchResults = searchByHeight(people);
+    case 'weight':
+      searchResults = searchByWeight(people);
+    case 'occupation':
+      searchResults = searchByOccupation(people);
+      break;
+    case 'parents':
+      searchResults = searchByParents(people);
+      break;
+    case 'current spouse':
+      searchResults = searchByCurrentSpouse(people);
       break;
   }}
   
 function searchByEyeColor(people){
   let chosenEyeColor = promptFor("What is their eye color?", autoValid);
-  // eyeColor = "brown"
   let foundPeople = people.filter(function(potentialMatch){
     if(potentialMatch.eyeColor === chosenEyeColor) { 
+      return true;
+     } else {
+       return false;
+     }
+  })
+  return foundPeople;
+}
+function searchById(people){
+  let chosenId = promptFor("What is their Id number?", autoValid);
+  let foundPeople = people.filter(function(potentialMatch){
+    if(potentialMatch.id === chosenId) { 
+      return true;
+     } else {
+       return false;
+     }
+  })
+  return foundPeople;
+}
+function searchByGender(people){
+  let chosenGender = promptFor("What is their gender?", autoValid);
+  let foundPeople = people.filter(function(potentialMatch){
+    if(potentialMatch.gender === chosenGender) { 
+      return true;
+     } else {
+       return false;
+     }
+  })
+  return foundPeople;
+}
+function searchByDob(people){
+  let chosenDob = promptFor("What is their date of birth? (MM/DD/YYYY)", autoValid);
+  let foundPeople = people.filter(function(potentialMatch){
+    if(potentialMatch.dob === chosenDob) { 
+      return true;
+     } else {
+       return false;
+     }
+  })
+  return foundPeople;
+}
+function searchByHeight(people){
+  let chosenHeight = promptFor("What is their height? (without unit of measurement)", autoValid);
+  let foundPeople = people.filter(function(potentialMatch){
+    if(potentialMatch.height === chosenHeight) { 
+      return true;
+     } else {
+       return false;
+     }
+  })
+  return foundPeople;
+}
+function searchByWeight(people){
+  let chosenWeight = promptFor("What is their weight? (without unit of measurement", autoValid);
+  let foundPeople = people.filter(function(potentialMatch){
+    if(potentialMatch.weight === chosenWeight) { 
+      return true;
+     } else {
+       return false;
+     }
+  })
+  return foundPeople;
+}
+function searchByOccupation(people){
+  let chosenOccupation = promptFor("What is their occupation?", autoValid);
+  let foundPeople = people.filter(function(potentialMatch){
+    if(potentialMatch.occupation === chosenOccupation) { 
+      return true;
+     } else {
+       return false;
+     }
+  })
+  return foundPeople;
+}
+function searchByParents(people){
+  let chosenParents = promptFor("What is their parents id number?", autoValid);
+  let foundPeople = people.filter(function(potentialMatch){
+    if(potentialMatch.parents === chosenParents) { 
+      return true;
+     } else {
+       return false;
+     }
+  })
+  return foundPeople;
+}
+function searchByCurrentSpouse(people){
+  let chosenCurrentSpouse = promptFor("What is their spouse's id number?", autoValid);
+  let foundPeople = people.filter(function(potentialMatch){
+    if(potentialMatch.currentSpouse === chosenCurrentSpouse) { 
       return true;
      } else {
        return false;
@@ -120,9 +233,6 @@ function searchByEyeColor(people){
 
 //TODO: add other trait filter functions here.
 
-// let tempPeople - people (500)
-// tempPeople = searchByEyeColor(tempPeople) 250
-// tempPeople = searchByGender(tempPeople) (125)
 
 //#endregion
 
