@@ -32,7 +32,7 @@ function mainMenu(person, people){
 
   /* Here we pass in the entire person object that we found in our search, as well as the entire original dataset of people. We need people in order to find descendants and other information that the user may want. */
 
-  if(!person){
+  if(person){
     alert("Could not find that individual.");
     return app(people); // restart
   }
@@ -69,10 +69,12 @@ function mainMenu(person, people){
 //nearly finished function used to search through an array of people to find matching first and last name and return a SINGLE person object.
 function searchByName(people){
   let firstName = promptFor("What is the person's first name?", autoValid);
+  let resultFirstName = firstName.toUpperCase();
   let lastName = promptFor("What is the person's last name?", autoValid);
+  let resultLastName = lastName.toUpperCase();
 
-  let foundPerson = people.filter(function(potentialMatch){
-    if(potentialMatch.firstName === firstName && potentialMatch.lastName === lastName){
+  let foundPerson = people.filter(function(el){
+    if(el.firstName === resultFirstName && el.lastName === resultLastName){
       return true;
     }
     else{
