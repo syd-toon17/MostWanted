@@ -73,8 +73,8 @@ function searchByName(people){
   let lastName = promptFor("What is the person's last name?", autoValid);
   let resultLastName = lastName.toUpperCase();
 
-  let foundPerson = people.filter(function(el){
-    if(el.firstName === resultFirstName && el.lastName === resultLastName){
+  let foundPerson = people.filter(function(potentialMatch){
+    if(potentialMatch.firstName === resultFirstName && potentialMatch.lastName === resultLastName){
       return true;
     }
     else{
@@ -88,31 +88,41 @@ function searchByName(people){
 //unfinished function to search through an array of people to find matching eye colors. Use searchByName as reference.
 function searchByTraits(people){
   //let searchEyeColor = searchByEyeColor(people);
+  // assign tempPeople to people
+
+ // while loop
+
+  // switch case
+
+// display people or person
+// tempPeople.length = 1
   let searchType = promptFor("Do you know their eye color?", yesNo).toLowerCase();
   let searchResults;
   switch(searchType){
     case 'yes':
       searchResults = searchByEyeColor(people);
       break;
-  }
+  }}
   
-  function searchByEyeColor(people){
-    let eyeColor = promptFor("What is their eye color?", autoValid);
-    let foundEyeColor = people.filter(function(potentialMatch){
-      if(potentialMatch.eyeColor === eyeColor){
-        return true;
-      }
-      else{
-        return false;
-      }
-    })
-    return foundEyeColor;
-  }
+function searchByEyeColor(people){
+  let chosenEyeColor = promptFor("What is their eye color?", autoValid);
+  // eyeColor = "brown"
+  let foundPeople = people.filter(function(potentialMatch){
+    if(potentialMatch.eyeColor === chosenEyeColor) { 
+      return true;
+     } else {
+       return false;
+     }
+  })
+  return foundPeople;
 }
+
 
 //TODO: add other trait filter functions here.
 
-
+// let tempPeople - people (500)
+// tempPeople = searchByEyeColor(tempPeople) 250
+// tempPeople = searchByGender(tempPeople) (125)
 
 //#endregion
 
