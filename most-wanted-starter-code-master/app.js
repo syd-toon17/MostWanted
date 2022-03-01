@@ -31,7 +31,7 @@ function mainMenu(person, people){
 
   /* Here we pass in the entire person object that we found in our search, as well as the entire original dataset of people. We need people in order to find descendants and other information that the user may want. */
 
-  if(!person){
+  if(person){
     alert("Could not find that individual.");
     return app(people); // restart
   }
@@ -70,8 +70,8 @@ function searchByName(people){
   let firstName = promptFor("What is the person's first name?", autoValid);
   let lastName = promptFor("What is the person's last name?", autoValid);
 
-  let foundPerson = people.filter(function(potentialMatch){
-    if(potentialMatch.firstName === firstName && potentialMatch.lastName === lastName){
+  let foundPerson = people.filter(function(el){
+    if(el.firstName === firstName && el.lastName === lastName){
       return true;
     }
     else{
