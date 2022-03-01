@@ -68,10 +68,12 @@ function mainMenu(person, people){
 //nearly finished function used to search through an array of people to find matching first and last name and return a SINGLE person object.
 function searchByName(people){
   let firstName = promptFor("What is the person's first name?", autoValid);
+  let resultFirstName = firstName.toUpperCase();
   let lastName = promptFor("What is the person's last name?", autoValid);
+  let resultLastName = lastName.toUpperCase();
 
   let foundPerson = people.filter(function(el){
-    if(el.firstName === firstName && el.lastName === lastName){
+    if(el.firstName === resultFirstName && el.lastName === resultLastName){
       return true;
     }
     else{
