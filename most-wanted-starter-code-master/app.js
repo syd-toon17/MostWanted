@@ -32,7 +32,7 @@ function mainMenu(person, people){
 
   /* Here we pass in the entire person object that we found in our search, as well as the entire original dataset of people. We need people in order to find descendants and other information that the user may want. */
 
-  if(person){
+  if(!person){
     alert("Could not find that individual.");
     return app(people); // restart
   }
@@ -88,44 +88,49 @@ function searchByName(people){
 //unfinished function to search through an array of people to find matching eye colors. Use searchByName as reference.
 
 function searchByTraits(people){
-  let searchType = promptFor("What trait would you like to search for?", autoValid).toLowerCase();
-  let tempPeople = people 
-    
-    
-    
-   
-    
-  // while loop
+  let tempPeople = people
+  let searchType = data.map(function(potentialMatch){
+    while(searchType !== 'search'){
+      searchType = promptFor("What trait would you like to search for?", autoValid).toLowerCase();
+      
+      // while loop
+      
 
-
-// display people or person
-// tempPeople.length = 1
-  
-  let searchResults;
-  switch(searchType){
-    case 'eye color':
-      searchResults = searchByEyeColor(people);
-      tempPeople = searchByEyeColor(tempPeople);
-      break;
-    case 'gender':
-      searchResults = searchByGender(people);
-      tempPeople = searchByGender(tempPeople);
-      break;
-    case 'height':
-      searchResults = searchByHeight(people);
-      tempPeople = searchByHeight(tempPeople);
-      break;
-    case 'weight':
-      searchResults = searchByWeight(people);
-      tempPeople = searchByWeight(tempPeople);
-      break;
-    case 'occupation':
-      searchResults = searchByOccupation(people);
-      tempPeople = searchByOccupation(tempPeople);
-      break;
-  }
-  searchByTraits(searchResults,people)
-  }
+    // display people or person
+    // tempPeople.length = 1
+      
+      let searchResults;
+      switch(searchType){
+        case 'eye color':
+          //searchResults = searchByEyeColor(people);
+          tempPeople = searchByEyeColor(tempPeople);
+          break;
+        case 'gender':
+          searchResults = searchByGender(people);
+          tempPeople = searchByGender(tempPeople);
+          break;
+        case 'height':
+          searchResults = searchByHeight(people);
+          tempPeople = searchByHeight(tempPeople);
+          break;
+        case 'weight':
+          searchResults = searchByWeight(people);
+          tempPeople = searchByWeight(tempPeople);
+          break;
+        case 'occupation':
+          searchResults = searchByOccupation(people);
+          tempPeople = searchByOccupation(tempPeople);
+          break;
+      }
+      if(tempPeople.length === 1){
+        return person
+      }
+      else{
+        return tempPeople
+      } 
+    }
+  })
+}
   
 function searchByEyeColor(people){
   let chosenEyeColor = promptFor("What is their eye color?", autoValid);
