@@ -42,6 +42,7 @@ function mainMenu(person, people){
   switch(displayOption){
     case "info":
     // TODO: get person's info
+    displayPerson(person)
     break;
     case "family":
     // TODO: get person's family
@@ -129,6 +130,10 @@ function searchByTraits(people){
       displayPeople(tempPeople);
       return tempPeople[0]
     }
+    else if(tempPeople.length === 0){
+      alert("There is no one in the database that matches the search criteria. Please press 'ok' to try again.")
+      return searchByTraits(people)
+    }
     else{
       displayPeople(tempPeople);
       let searchResults = promptFor("Have you found the person you are searching for?", yesNo).toLowerCase();
@@ -143,7 +148,7 @@ function searchByTraits(people){
 }
   
 function searchByEyeColor(people){
-  let chosenEyeColor = promptFor("What is their eye color?", autoValid);
+  let chosenEyeColor = promptFor("What is their eye color?", traitValidationEyeColor);
   let foundPeople = people.filter(function(potentialMatch){
     if(potentialMatch.eyeColor === chosenEyeColor) { 
       return true;
@@ -154,7 +159,7 @@ function searchByEyeColor(people){
   return foundPeople;
 }
 function searchByGender(people){
-  let chosenGender = promptFor("What is their gender?", autoValid);
+  let chosenGender = promptFor("What is their gender?", traitValidationGender);
   let foundPeople = people.filter(function(potentialMatch){
     if(potentialMatch.gender === chosenGender) { 
       return true;
@@ -165,7 +170,7 @@ function searchByGender(people){
   return foundPeople;
 }
 function searchByHeight(people){
-  let chosenHeight = promptFor("What is their height? (without unit of measurement)", autoValid);
+  let chosenHeight = promptFor("What is their height? (without unit of measurement)", traitValidationHeight);
   let foundPeople = people.filter(function(potentialMatch){
     if(potentialMatch.height === chosenHeight) { 
       return true;
@@ -176,7 +181,7 @@ function searchByHeight(people){
   return foundPeople;
 }
 function searchByWeight(people){
-  let chosenWeight = promptFor("What is their weight? (without unit of measurement", autoValid);
+  let chosenWeight = promptFor("What is their weight? (without unit of measurement", traitValidationWeight);
   let foundPeople = people.filter(function(potentialMatch){
     if(potentialMatch.weight === chosenWeight) { 
       return true;
@@ -187,7 +192,7 @@ function searchByWeight(people){
   return foundPeople;
 }
 function searchByOccupation(people){
-  let chosenOccupation = promptFor("What is their occupation?", autoValid);
+  let chosenOccupation = promptFor("What is their occupation?", traitValidationOccupation);
   let foundPeople = people.filter(function(potentialMatch){
     if(potentialMatch.occupation === chosenOccupation) { 
       return true;
@@ -219,9 +224,17 @@ function displayPeople(people){
 function displayPerson(person){
   // print all of the information about a person:
   // height, weight, age, name, occupation, eye color.
-  let personInfo = "First Name: " + person.firstName + "\n";
+  let personInfo = "Id: " + person.id + "\n";
+  personInfo += "First Name: " + person.firstName + "\n";
   personInfo += "Last Name: " + person.lastName + "\n";
-  // TODO: finish getting the rest of the information to display.
+  personInfo += "Gender: " + person.gender + "\n";
+  personInfo += "Date of Birth: " + person.dob + "\n";
+  personInfo += "Height: " + person.height + "\n";
+  personInfo += "Weight: " + person.weight + "\n";
+  personInfo += "Eye Color: " + person.eyeColor + "\n";
+  personInfo += "Occupation: " + person.occupation + "\n";
+  personInfo += "Parents: " + person.parents + "\n";
+  personInfo += "Current Spouse: " + person.currentSpouse + "\n";
   alert(personInfo);
 }
 
@@ -269,8 +282,50 @@ function autoValid(input){
 //Unfinished validation function you can use for any of your custom validation callbacks.
 //can be used for things like eye color validation for example.
 //write validation function custom to our trait search functions
-function customValidation(input){
-  
+function traitValidationEyeColor(input){
+  if(input.toLowerCase()=== "brown" || input.toLowerCase() === "blue" || input.toLowerCase() === "black" || input.toLowerCase() === "hazel" || input.toLowerCase() === "green"){
+    return true;
+  }
+  else{
+    alert("No one in the database matches that eye color.")
+    return false;
+  }
 }
+function traitValidationGender(input){
+  if(input.toLowerCase()=== "male" || input.toLowerCase() === "female"){
+    return true;
+  }
+  else{
+    alert("Please enter male or female.")
+    return false; 
+  }
+}
+function traitValidationHeight(input){
+  if(input >= 58 && input <= 76 ){
+    return true;
+  }
+  else{
+    alert("No one in the database matches that height.")
+    return false; 
+  }
+}
+function traitValidationWeight(input){
+  if(input >= 100 && input <= 256 ){
+    return true;
+  }
+  else{
+    alert("No one in the database matches that weight.")
+    return false; 
+  }
+}
+function traitValidationOccupation(input){
+  if(input.toLowerCase()=== "programmer" || input.toLowerCase() === "assistant" || input.toLowerCase() === "landscaper" || input.toLowerCase() === "nurse" || input.toLowerCase() === "student" || input.toLowerCase() === "architect" || input.toLowerCase() === "doctor" || input.toLowerCase() === "politition"){
+    return true;
+    }
+  else{
+    alert("No one in the database matches that occupation.")
+    return false;
+  }
+  }
 
 //#endregion
