@@ -41,7 +41,6 @@ function mainMenu(person, people){
 
   switch(displayOption){
     case "info":
-    // TODO: get person's info
     displayPerson(person)
     break;
     case "family":
@@ -236,8 +235,19 @@ function displayPerson(person){
   personInfo += "Parents: " + person.parents + "\n";
   personInfo += "Current Spouse: " + person.currentSpouse + "\n";
   alert(personInfo);
+  mainMenu(person)
 }
 
+function displayFamily(person){
+  let personFamily = "Parents" + person.parents + "\n";
+  personFamily += "Current Spouse" + person.currentSpouse + "\n";
+  let self = person.id[0];
+  self != people.id;
+  //personFamily += "Sibling" + 
+  //person.id cannot be = any other id (you cannot be your own sibling)
+  //person.parent should be = someone else's parent
+  //do we need a "self" differentiation?
+}
 //#endregion
 
 
