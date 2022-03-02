@@ -59,17 +59,6 @@ function mainMenu(person, people){
   }
 }
 
-let chosenPerson
-function searchByInfo(people){
-  let chosenPersonInfo = people.filter(function(potentialMatch){
-    if(potentialMatch.info === "info") { 
-      return true;
-     } else {
-       return false;
-     }
-  })
-  return foundPeople;
-}
 //#endregion
 
 //Filter functions.
@@ -85,10 +74,12 @@ function searchByName(people){
   let resultLastName = lastName.toUpperCase();
 
   let foundPerson = people.filter(function(potentialMatch){
-    if(potentialMatch.firstName === resultFirstName && potentialMatch.lastName === resultLastName){
+    if(potentialMatch.firstName.toUpperCase() === resultFirstName && potentialMatch.lastName.toUpperCase() === resultLastName){
       return true;
     }
     else{
+      console.log("potentialMatch.firstName", potentialMatch.firstName)
+      console.log("resultFirstName", resultFirstName)
       return false;
     }
   })
@@ -135,16 +126,17 @@ function searchByTraits(people){
       
     }
     if(tempPeople.length === 1){
-      displayPeople(tempPeople)
+      displayPeople(tempPeople);
       return tempPeople[0]
     }
     else{
-      displayPeople(tempPeople)
-      let searchResults = promptFor("Have you found the person you are searching for?", yesNo).toLowerCase()
-      if(searchResults === 'yes')
-        searchByName(people)
+      displayPeople(tempPeople);
+      let searchResults = promptFor("Have you found the person you are searching for?", yesNo).toLowerCase();
+      if(searchResults === 'yes'){
+        return searchByName(people)
+      }
       else{
-        searchByTraits(people)
+        return searchByTraits(people)
       }
       
     } 
@@ -246,6 +238,9 @@ function displayPerson(person){
 //response: Will capture the user input.
 //isValid: Will capture the return of the validation function callback. true(the user input is valid)/false(the user input was not valid).
 //this function will continue to loop until the user enters something that is not an empty string("") or is considered valid based off the callback function(valid).
+
+
+
 function promptFor(question, valid){
   let isValid;
   do{
@@ -273,6 +268,7 @@ function autoValid(input){
 
 //Unfinished validation function you can use for any of your custom validation callbacks.
 //can be used for things like eye color validation for example.
+//write validation function custom to our trait search functions
 function customValidation(input){
   
 }
