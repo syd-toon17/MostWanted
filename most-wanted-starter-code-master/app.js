@@ -69,7 +69,7 @@ function searchByInfo(people){
      }
   })
   return foundPeople;
-
+}
 //#endregion
 
 //Filter functions.
@@ -135,11 +135,18 @@ function searchByTraits(people){
       
     }
     if(tempPeople.length === 1){
+      displayPeople(tempPeople)
       return tempPeople[0]
     }
     else{
-      alert("we have found " + {tempPeople} + "that match your search.")
-      return tempPeople
+      displayPeople(tempPeople)
+      let searchResults = promptFor("Have you found the person you are searching for?", yesNo).toLowerCase()
+      if(searchResults === 'yes')
+        searchByName(people)
+      else{
+        searchByTraits(people)
+      }
+      
     } 
 }
   
