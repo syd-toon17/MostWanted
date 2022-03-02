@@ -89,7 +89,9 @@ function searchByName(people){
 
 function searchByTraits(people){
   let tempPeople = people
-  let searchType = data.map(function(potentialMatch){
+  let searchType;
+  
+    
     while(searchType !== 'search'){
       searchType = promptFor("What trait would you like to search for?", autoValid).toLowerCase();
       
@@ -97,39 +99,35 @@ function searchByTraits(people){
       
 
     // display people or person
-    // tempPeople.length = 1
+    
       
-      let searchResults;
+     
       switch(searchType){
         case 'eye color':
-          //searchResults = searchByEyeColor(people);
           tempPeople = searchByEyeColor(tempPeople);
           break;
         case 'gender':
-          searchResults = searchByGender(people);
           tempPeople = searchByGender(tempPeople);
           break;
         case 'height':
-          searchResults = searchByHeight(people);
           tempPeople = searchByHeight(tempPeople);
           break;
         case 'weight':
-          searchResults = searchByWeight(people);
           tempPeople = searchByWeight(tempPeople);
           break;
         case 'occupation':
-          searchResults = searchByOccupation(people);
           tempPeople = searchByOccupation(tempPeople);
           break;
       }
-      if(tempPeople.length === 1){
-        return person
-      }
-      else{
-        return tempPeople
-      } 
+      console.log(tempPeople)
+      
     }
-  })
+    if(tempPeople.length === 1){
+      return tempPeople[0]
+    }
+    else{
+      return tempPeople
+    } 
 }
   
 function searchByEyeColor(people){
