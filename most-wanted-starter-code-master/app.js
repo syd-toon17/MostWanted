@@ -59,6 +59,17 @@ function mainMenu(person, people){
   }
 }
 
+let chosenPerson
+function searchByInfo(people){
+  let chosenPersonInfo = people.filter(function(potentialMatch){
+    if(potentialMatch.info === "info") { 
+      return true;
+     } else {
+       return false;
+     }
+  })
+  return foundPeople;
+
 //#endregion
 
 //Filter functions.
@@ -92,8 +103,9 @@ function searchByTraits(people){
   let searchType;
   
     
+  
     while(searchType !== 'search'){
-      searchType = promptFor("What trait would you like to search for?", autoValid).toLowerCase();
+      searchType = promptFor("What trait would you like to search for? Or type 'search' to see list.", autoValid).toLowerCase();
       
       // while loop
       
@@ -126,6 +138,7 @@ function searchByTraits(people){
       return tempPeople[0]
     }
     else{
+      alert("we have found " + {tempPeople} + "that match your search.")
       return tempPeople
     } 
 }
