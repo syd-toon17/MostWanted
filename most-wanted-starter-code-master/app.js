@@ -44,6 +44,7 @@ function mainMenu(person, people){
     displayPerson(person)
     break;
     case "family":
+    displayFamily(person)
     // TODO: get person's family
     break;
     case "descendants":
@@ -78,8 +79,6 @@ function searchByName(people){
       return true;
     }
     else{
-      console.log("potentialMatch.firstName", potentialMatch.firstName)
-      console.log("resultFirstName", resultFirstName)
       return false;
     }
   })
@@ -238,16 +237,25 @@ function displayPerson(person){
   mainMenu(person)
 }
 
-function displayFamily(person){
-  let personFamily = "Parents" + person.parents + "\n";
-  personFamily += "Current Spouse" + person.currentSpouse + "\n";
-  let self = person.id[0];
-  self != people.id;
-  //personFamily += "Sibling" + 
-  //person.id cannot be = any other id (you cannot be your own sibling)
-  //person.parent should be = someone else's parent
-  //do we need a "self" differentiation?
+function displayFamily(person, people){
+  let personFamily = "Parents: " + person.parents + "\n";
+  personFamily += "Current Spouse: " + person.currentSpouse + "\n";
+  let personSibling = people.filter(function(potentialMatch){
+    if(person.parents[0] === potentialMatch.parents[0] || person.parents[1] === potentialMatch.parents[0] || person.parents[0] === potentialMatch.parents[1] || person.parents[1] === potentialMatch.parents[1]){
+      alert(personSibling);
+      return true;
+    }
+    else{
+      alert("This person doesn't have any siblings in our system.")
+      return false;
+    } 
+  })
+  mainMenu(person)
 }
+
+//function displayDescendants(person){
+
+//}
 //#endregion
 
 
