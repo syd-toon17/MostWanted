@@ -48,6 +48,7 @@ function mainMenu(person, people){
     // TODO: get person's family
     break;
     case "descendants":
+      displayDescendants(person, people)
     // TODO: get person's descendants
     break;
     case "restart":
@@ -276,9 +277,22 @@ function displayFamily(person, people){
   mainMenu(person)
 }
 
-//function displayDescendants(person){
-
-//}
+function displayDescendants(person, people){
+  let personDescendants = people.filter(function(potentialMatch){
+    if(potentialMatch.parents.includes(person.id)){
+      if(potentialMatch.parents.length >= 1 && potentialMatch != person){
+      return true;
+      }
+    }
+    else{
+      return false;
+    }
+  })
+  let displayString = ""
+  displayString += "Descendants: " + displayPeople(personDescendants)
+  alert(displayString)
+  mainMenu(person)
+}
 //#endregion
 
 
