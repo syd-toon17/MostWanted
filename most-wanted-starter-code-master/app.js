@@ -125,7 +125,7 @@ function searchByTraits(people){
       
     }
     if(tempPeople.length === 1){
-      displayPeople(tempPeople);
+      alert(displayPeople(tempPeople));
       return tempPeople[0]
     }
     else if(tempPeople.length === 0){
@@ -133,7 +133,7 @@ function searchByTraits(people){
       return searchByTraits(people)
     }
     else{
-      displayPeople(tempPeople);
+      alert(displayPeople(tempPeople));
       let searchResults = promptFor("Have you found the person you are searching for?", yesNo).toLowerCase();
       if(searchResults === 'yes'){
         return searchByName(people)
@@ -214,7 +214,7 @@ function searchByOccupation(people){
 
 // alerts a list of people
 function displayPeople(people){
-  alert(people.map(function(person){
+  return(people.map(function(person){
     return person.firstName + " " + person.lastName;
   }).join("\n"));
 }
@@ -239,8 +239,7 @@ function displayPerson(person){
 
 function displayFamily(person, people){
   let personParents = people.filter(function(potentialMatch){
-    if(person.parents === potentialMatch.id){
-      //displayPeople(personParents)
+    if(person.parents.includes(potentialMatch.id)){
       return true
     }
     else{
@@ -249,7 +248,9 @@ function displayFamily(person, people){
   })
   let personSpouse = people.filter(function(potentialMatch){
     if(person.currentSpouse === potentialMatch.id){
-      return true
+      if(potentialMatch.parents.length >= 1 && potentialMatch != person){
+        return true;
+      }
     }
     else{
       return false
@@ -266,11 +267,12 @@ function displayFamily(person, people){
         return false;
       }
     })
-    let personFamily = personParents[0] + personSpouse[0] + personSiblings[0];
-    // displayPeople(personParents)
-    // displayPeople(personSiblings)
-    // displayPeople(personSpouse)
-    displayPeople(personFamily)
+    let displayString = ""
+    displayString += "Parents: " + displayPeople(personParents) + "\n";
+    displayString += "Siblings: " + displayPeople(personSiblings) + "\n";
+    displayString += "Spouse: " + displayPeople(personSpouse) + "\n";
+    //let personFamily = personParents.concat(personSiblings, personSpouse);
+    alert(displayString)
   mainMenu(person)
 }
 
