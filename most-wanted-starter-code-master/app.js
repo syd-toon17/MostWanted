@@ -238,25 +238,39 @@ function displayPerson(person){
 }
 
 function displayFamily(person, people){
-  let personFamily = "Parents: " + person.parents + "\n";
-  personFamily += "Current Spouse: " + person.currentSpouse + "\n";
-  let personSiblings = people.filter(function(potentialMatch){
-    if(person.parents[0] === potentialMatch.parents[0] || person.parents[1] === potentialMatch.parents[0] || person.parents[0] === potentialMatch.parents[1] || person.parents[1] === potentialMatch.parents[1]){
-      if(potentialMatch.length >= 1){
-        alert(potentialMatch[0]);
-        return true;
-      }
-      else{
-        return false
-      }
-       
+  let personParents = people.filter(function(potentialMatch){
+    if(person.parents === potentialMatch.id){
+      //displayPeople(personParents)
+      return true
     }
     else{
-      alert("This person doesn't have any siblings in our system.")
-      return false;
-    } 
+      return false
+    }
   })
-  displayPeople(personSiblings)
+  let personSpouse = people.filter(function(potentialMatch){
+    if(person.currentSpouse === potentialMatch.id){
+      return true
+    }
+    else{
+      return false
+    }
+  })
+    
+  let personSiblings = people.filter(function(potentialMatch){
+    if(person.parents[0] === potentialMatch.parents[0] || person.parents[1] === potentialMatch.parents[0] || person.parents[0] === potentialMatch.parents[1] || person.parents[1] === potentialMatch.parents[1]){
+      if(potentialMatch.parents.length >= 1 && potentialMatch != person){
+        return true;
+      }
+    }
+      else{
+        return false;
+      }
+    })
+    let personFamily = personParents[0] + personSpouse[0] + personSiblings[0];
+    // displayPeople(personParents)
+    // displayPeople(personSiblings)
+    // displayPeople(personSpouse)
+    displayPeople(personFamily)
   mainMenu(person)
 }
 
