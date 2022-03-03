@@ -44,7 +44,7 @@ function mainMenu(person, people){
     displayPerson(person)
     break;
     case "family":
-    displayFamily(person)
+    displayFamily(person, people)
     // TODO: get person's family
     break;
     case "descendants":
@@ -240,16 +240,23 @@ function displayPerson(person){
 function displayFamily(person, people){
   let personFamily = "Parents: " + person.parents + "\n";
   personFamily += "Current Spouse: " + person.currentSpouse + "\n";
-  let personSibling = people.filter(function(potentialMatch){
+  let personSiblings = people.filter(function(potentialMatch){
     if(person.parents[0] === potentialMatch.parents[0] || person.parents[1] === potentialMatch.parents[0] || person.parents[0] === potentialMatch.parents[1] || person.parents[1] === potentialMatch.parents[1]){
-      alert(personSibling);
-      return true;
+      if(potentialMatch.length >= 1){
+        alert(potentialMatch[0]);
+        return true;
+      }
+      else{
+        return false
+      }
+       
     }
     else{
       alert("This person doesn't have any siblings in our system.")
       return false;
     } 
   })
+  displayPeople(personSiblings)
   mainMenu(person)
 }
 
